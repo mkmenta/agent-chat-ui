@@ -17,6 +17,7 @@ import { TooltipIconButton } from "./tooltip-icon-button";
 import {
   ArrowDown,
   LoaderCircle,
+  LogOut,
   PanelRightOpen,
   PanelRightClose,
   SquarePen,
@@ -105,6 +106,34 @@ function OpenGitHubRepo() {
         </TooltipTrigger>
         <TooltipContent side="left">
           <p>Open GitHub repo</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}
+
+function LogoutButton() {
+  if (process.env.NEXT_PUBLIC_AUTH_ENABLED !== "true") return null;
+
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    window.location.href = "/login";
+  }
+
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleLogout}
+          >
+            <LogOut className="size-5" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent side="left">
+          <p>Sign out</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -325,8 +354,9 @@ export function Thread() {
                   </Button>
                 )}
               </div>
-              <div className="absolute top-2 right-4 flex items-center">
+              <div className="absolute top-2 right-4 flex items-center gap-1">
                 <OpenGitHubRepo />
+                <LogoutButton />
               </div>
             </div>
           )}
@@ -371,8 +401,9 @@ export function Thread() {
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="flex items-center">
+                <div className="flex items-center gap-1">
                   <OpenGitHubRepo />
+                  <LogoutButton />
                 </div>
                 <TooltipIconButton
                   size="lg"
