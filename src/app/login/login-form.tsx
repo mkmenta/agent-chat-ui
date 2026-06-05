@@ -47,9 +47,7 @@ export function LoginForm() {
         <div className="mt-14 flex flex-col gap-2 border-b p-6">
           <div className="flex flex-col items-start gap-2">
             <LangGraphLogoSVG className="h-7" />
-            <h1 className="text-xl font-semibold tracking-tight">
-              Agent Chat
-            </h1>
+            <h1 className="text-xl font-semibold tracking-tight">Agent Chat</h1>
           </div>
           <p className="text-muted-foreground">Sign in to continue.</p>
         </div>
